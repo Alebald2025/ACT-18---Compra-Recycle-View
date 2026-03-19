@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 class ProductsManager : AppCompatActivity() {
 
     private val products = listOf(
-        Product("Laptop", "1200.00 €", R.drawable.ic_launcher_background),
-        Product("Smartphone", "800.00 €", R.drawable.ic_launcher_background),
-        Product("Headphones", "100.00 €", R.drawable.ic_launcher_background),
-        Product("Mouse", "60.00 €", R.drawable.ic_launcher_background),
-        Product("Keyboard", "80.00 €", R.drawable.ic_launcher_background)
+        Product("Laptop", "1200.00 €", R.drawable.laptop),
+        Product("Smartphone", "800.00 €", R.drawable.smarthpone),
+        Product("Headphones", "100.00 €", R.drawable.headphones),
+        Product("Mouse", "60.00 €", R.drawable.mouse),
+        Product("Keyboard", "80.00 €", R.drawable.keyboard)
     )
 
     private val cart = mutableMapOf<Product, Int>()   // product -> quantitat
