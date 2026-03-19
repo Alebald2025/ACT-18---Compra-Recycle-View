@@ -1,28 +1,61 @@
 package com.example.act18_alejandro
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ProductsManager : AppCompatActivity() {
 
+    private val products = listOf(
+        Product("Laptop", "1200.00 €", R.drawable.ic_launcher_background),
+        Product("Smartphone", "800.00 €", R.drawable.ic_launcher_background),
+        Product("Headphones", "100.00 €", R.drawable.ic_launcher_background),
+        Product("Mouse", "60.00 €", R.drawable.ic_launcher_background),
+        Product("Keyboard", "80.00 €", R.drawable.ic_launcher_background)
+    )
+
+    private val cart = mutableMapOf<Product, Int>()   // product -> quantitat
+
+    private lateinit var tvTotal: TextView
+    private lateinit var adapter: ProductAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products_manager)
 
-        val productList = listOf(
-            Product("Laptop", "$1200", R.drawable.ic_launcher_background),
-            Product("Smartphone", "$800", R.drawable.ic_launcher_background),
-            Product("Headphones", "$100", R.drawable.ic_launcher_background),
-            Product("Mouse", "$60", R.drawable.ic_launcher_background),
-            Product("Keyboard", "$80", R.drawable.ic_launcher_background),
-            Product("Microphone", "$150", R.drawable.ic_launcher_background),
-            Product("Sound System", "$220", R.drawable.ic_launcher_background)
-        )
+        // Aquí usas las variables que ya declaraste con lateinit
+        tvTotal = findViewById(R.id.tvTotal)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        val btnSummary: Button = findViewById(R.id.btnGoToSummary)
+
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ProductAdapter(productList)
+        adapter = ProductAdapter(products, cart) { updateTotal() }
+        recyclerView.adapter = adapter
+
+        btnSummary.setOnClickListener {
+            val cartList = cart.map { (product, qty) ->
+                CarProducts(product, qty)
+            }.filter { it.quantity > 0 }
+
+            val intent = Intent(this, CarritoCompras::class.java)
+            intent.putParcelableArrayListExtra("cart_list", ArrayList(cartList))
+            startActivity(intent)
+        }
+
+        updateTotal()
+    }
+
+    private fun updateTotal() {
+        var total = 0.0
+        cart.forEach { (product, qty) ->
+            val priceNum = product.price.replace(Regex("[^0-9.]"), "").toDoubleOrNull() ?: 0.0
+            total += priceNum * qty
+        }
+        tvTotal.text = "Total: ${String.format("%.2f", total)} €"
     }
 }

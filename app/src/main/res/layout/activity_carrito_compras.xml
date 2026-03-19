@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Resum de la compra"
+        android:text="Carrito de la compra"
         android:textSize="22sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -29,14 +29,14 @@
             android:id="@+id/btnBack"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Tornar" />
+            android:layout_height="match_parent"
+            android:text="Volver" />
 
         <Button
             android:id="@+id/btnConfirm"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Confirmar compra" />
 
     </LinearLayout>

@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class CarritoAdapter(private val cartItems: List<CartItem>) :
+class CarritoAdapter(private val carProducts: List<CarProducts>) :
     RecyclerView.Adapter<CarritoAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,12 +21,12 @@ class CarritoAdapter(private val cartItems: List<CartItem>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_summary, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.product_carrito, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = cartItems[position]
+        val item = carProducts[position]
         val priceNum = item.product.price.replace(Regex("[^0-9.]"), "").toDoubleOrNull() ?: 0.0
         val sub = priceNum * item.quantity
 
@@ -37,5 +37,5 @@ class CarritoAdapter(private val cartItems: List<CartItem>) :
         holder.subtotal.text = "Subtotal: ${String.format("%.2f", sub)} €"
     }
 
-    override fun getItemCount() = cartItems.size
+    override fun getItemCount() = carProducts.size
 }
