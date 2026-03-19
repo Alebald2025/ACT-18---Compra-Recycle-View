@@ -13,6 +13,20 @@
         android:theme="@style/Theme.ACT18_Alejandro"
         tools:targetApi="31">
         <activity
+            android:name=".CarritoAdapter"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CarritoCompras"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CarProducts"
             android:exported="false">
             <meta-data
