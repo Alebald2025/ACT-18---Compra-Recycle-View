@@ -18,10 +18,8 @@ class CarritoCompras : AppCompatActivity() {
         val btnBack: Button = findViewById(R.id.btnBack)
         val btnConfirm: Button = findViewById(R.id.btnConfirm)
 
-        // Rebre la llista (pot ser null)
         val cartList: ArrayList<CarProducts>? = intent.getParcelableArrayListExtra("cart_list")
 
-        // Si és null → llista buida
         val items = cartList ?: arrayListOf()
 
         recyclerSummary.layoutManager = LinearLayoutManager(this)
@@ -31,7 +29,7 @@ class CarritoCompras : AppCompatActivity() {
 
         btnConfirm.setOnClickListener {
             if (items.isEmpty()) {
-                Toast.makeText(this, "El carrito està buit", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "El carrito está vacio", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -46,10 +44,9 @@ class CarritoCompras : AppCompatActivity() {
                 p * item.quantity
             }
             Log.d("COMPRA", "TOTAL: ${String.format("%.2f", total)} €")
-            Log.d("COMPRA", "Gràcies per la compra!")
+            Log.d("COMPRA", "Gracias por la compra!")
 
-            Toast.makeText(this, "Compra confirmada! Mira Logcat", Toast.LENGTH_LONG).show()
-            // Opcional: finish() o tornar a la llista
+            Toast.makeText(this, "Compra confirmada!", Toast.LENGTH_LONG).show()
         }
     }
 }

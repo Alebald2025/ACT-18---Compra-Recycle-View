@@ -18,7 +18,7 @@ class ProductsManager : AppCompatActivity() {
         Product("Keyboard", "80.00 €", R.drawable.keyboard)
     )
 
-    private val cart = mutableMapOf<Product, Int>()   // product -> quantitat
+    private val cart = mutableMapOf<Product, Int>()
 
     private lateinit var tvTotal: TextView
     private lateinit var adapter: ProductAdapter
@@ -27,7 +27,6 @@ class ProductsManager : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products_manager)
 
-        // Aquí usas las variables que ya declaraste con lateinit
         tvTotal = findViewById(R.id.tvTotal)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
